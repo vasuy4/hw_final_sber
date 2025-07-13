@@ -1,14 +1,11 @@
-FROM python:3.11.9-slim-bookworm
+FROM python:3.11.9-slim
 
-WORKDIR .
+WORKDIR /app
 
-COPY main.py .
+COPY app.py /app/
 
-RUN pip install --no-cache-dir flask gunicorn
+RUN pip install --no-cache-dir flask
 
-# EXPOSE 8080
+EXPOSE 8080
 
-# ENTRYPOINT ["python", "main.py"]
-CMD ["gunicorn", "main:app", "-b", "127.0.0.1:8080", "--timeout", "120"]
-# docker build -t final_sber .
-# docker run -d -p 8080:8080 --name my-app final_sber
+CMD ["python", "app.py"]
